@@ -24,11 +24,11 @@ BiocManager::install(version='devel')
 BiocManager::install("caROC")
 ```
 
-### How to get help for cequre
+### How to get help for caROC
 
-Any TOAST questions should be posted
-to the GitHub Issue section of TOAST 
-homepage at https://github.com/ziyili20/cequre/issues.
+Any caROC questions should be posted
+to the GitHub Issue section of caROC 
+homepage at https://github.com/ziyili20/caROC/issues.
 
 ### Quick start on evaluating continuous biomarker with covariates adjusted
 
