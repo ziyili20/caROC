@@ -21,7 +21,7 @@ if (!requireNamespace("BiocManager", quietly = TRUE))
 # The following initializes usage of Bioc devel
 BiocManager::install(version='devel')
 
-BiocManager::install("cequre")
+BiocManager::install("caROC")
 ```
 
 ### How to get help for cequre
