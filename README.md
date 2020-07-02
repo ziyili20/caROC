@@ -15,13 +15,8 @@ R CMD INSTALL cequre_1.3.tar.gz
 After `cequre` package has been installed, install `caROC` through
 
 ```{r install, message=FALSE, warning=FALSE}
-if (!requireNamespace("BiocManager", quietly = TRUE))
-    install.packages("BiocManager")
-
-# The following initializes usage of Bioc devel
-BiocManager::install(version='devel')
-
-BiocManager::install("caROC")
+library(devtools)
+install_github("ziyili20/caROC")
 ```
 
 ### How to get help for caROC
