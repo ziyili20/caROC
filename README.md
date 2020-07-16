@@ -1,6 +1,6 @@
 # Evaluate continuous biomarkers with caROC
 
-`caROC` is an R package devoted to the assessment of continuous biomarkers. The metrics considered include **specificity at contolled sensitivity level**, **sensitivity at controlled specificity level**, **receiver operating characteristic** (ROC) curve. We allow both categorical and continuous covariates to be adjusted for in computing these metrics.
+`caROC` is an R package devoted to the assessment of continuous biomarkers. The metrics considered include **specificity at contolled sensitivity level**, **sensitivity at controlled specificity level**, and **receiver operating characteristic** (ROC) curve. We allow both categorical and continuous covariates to be adjusted in computing these metrics.
 
 ## Installation and quick start
 
