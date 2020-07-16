@@ -7,8 +7,8 @@ Compute covariate-adjusted specificity at controlled sensitivity level, or covar
 }
 \usage{
 caROC(diseaseData, controlData, userFormula, control_sensitivity = NULL,
-control_specificity = NULL, mono_resp_method = "curve",
-whichSE = "numerical", global_ROC_controlled_by = "sensitivity",
+control_specificity = NULL, mono_resp_method = "ROC",
+whichSE = "sample", global_ROC_controlled_by = "sensitivity",
 nbootstrap = 100, CI_alpha = 0.95, logit_CI = TRUE,
 verbose = TRUE)
 }
@@ -29,10 +29,10 @@ The level(s) of sensitivity to be controlled at. Could be a scalar (e.g. 0.7) or
 The level(s) of specificity to be controlled at. Could be a scalar (e.g. 0.7) or a numeric vector (e.g. c(0.7, 0.8, 0.9)).
 }
   \item{mono_resp_method}{
-The method used to restore monotonicity of the ROC curve or computed sensitivity/specificity value. It should one from the following: "none", "mono", "curve". "none" is not applying any monotonicity respecting method. "mono" is to apply the approach by Huang (2017). "curve" is to apply curve-based monotonicity respecting approach. Default value is "curve".
+The method used to restore monotonicity of the ROC curve or computed sensitivity/specificity value. It should one from the following: "none", "regression", "ROC". "none" is not applying any monotonicity respecting method. "regression" is to apply the approach by Huang (2017) on quantile regression step. "ROC" is to apply ROC-based monotonicity respecting approach. Default value is "ROC".
 }
   \item{whichSE}{
-The method used to compute standard error. It should be one from the following: "numerical", "bootstrap", meaning to calculate the standard error using numerical approach or bootstrap. Default is "numerical".
+The method used to compute standard error. It should be one from the following: "sample", "bootstrap", meaning to calculate the standard error using sample-based approach or bootstrap. Default is "sample".
 }
   \item{global_ROC_controlled_by}{
 Whether sensitivity/specificity is used to control when computing global ROC. It should one from the following: "sensitivity", "specificity". Default is "sensitivity".
@@ -89,7 +89,7 @@ userFormula = "M~Z"
 ## controlled sensitivity levels (0.2, 0.8, 0.9)
 caROC(diseaseData,controlData,userFormula,
       control_sensitivity = c(0.2,0.8, 0.9),
-      control_specificity = NULL,mono_resp_method = "curve",
+      control_specificity = NULL,mono_resp_method = "ROC",
       whichSE = "bootstrap",nbootstrap = 100,
       CI_alpha = 0.95, logit_CI = TRUE)
 
@@ -98,16 +98,16 @@ caROC(diseaseData,controlData,userFormula,
 caROC(diseaseData,controlData,userFormula,
       control_sensitivity = NULL,
       control_specificity = c(0.7,0.8, 0.9),mono_resp_method = "none",
-      whichSE = "numerical",nbootstrap = 100,
+      whichSE = "sample",nbootstrap = 100,
       CI_alpha = 0.95, logit_CI = TRUE)
 
 ## calculate the whole covariate-adjusted ROC curve
-noneROC <- caROC(diseaseData,controlData,userFormula = "M~Z",
+ROC1 <- caROC(diseaseData,controlData,userFormula = "M~Z",
                  mono_resp_method = "none")
-monoROC <- caROC(diseaseData,controlData,userFormula = "M~Z",
-                 mono_resp_method = "mono")
-curveROC <- caROC(diseaseData,controlData,userFormula = "M~Z",
-                 mono_resp_method = "curve")
+ROC2 <- caROC(diseaseData,controlData,userFormula = "M~Z",
+                 mono_resp_method = "regression")
+ROC3 <- caROC(diseaseData,controlData,userFormula = "M~Z",
+                 mono_resp_method = "ROC")
 }
 \keyword{ sensitivity }% use one of  RShowDoc("KEYWORDS")
 \keyword{ specificity }% __ONLY ONE__ keyword per line

@@ -18,16 +18,16 @@ GetROC <- function(diseaseData,
             myROC <- AdjSpec_AllPoints_none(diseaseData = diseaseData,
                                             controlData = controlData,
                                             userFormula = userFormula)
-        } else if (mono_resp_method == "mono") {
+        } else if (mono_resp_method == "regression") {
             myROC <- AdjSpec_AllPoints_mono(diseaseData = diseaseData,
                                             controlData = controlData,
                                             userFormula = userFormula)
-        } else if (mono_resp_method == "curve") {
+        } else if (mono_resp_method == "ROC") {
             myROC <- AdjSpec_AllPoints_curve(diseaseData = diseaseData,
                                              controlData = controlData,
                                              userFormula = userFormula)
         } else {
-            stop("mono_resp_method need to be among the following: mono/curve/none!")
+            stop("mono_resp_method need to be among the following: regression/ROC/none!")
         }
 
         if (min(myROC$sensitivity)!=0 | max(myROC$specificity)!=1) {
@@ -54,16 +54,16 @@ GetROC <- function(diseaseData,
             tmpROC <- AdjSpec_AllPoints_none(diseaseData = revData$diseaseData,
                                             controlData = revData$controlData,
                                             userFormula = userFormula)
-        } else if (mono_resp_method == "mono") {
+        } else if (mono_resp_method == "regression") {
             tmpROC <- AdjSpec_AllPoints_mono(diseaseData = revData$diseaseData,
                                             controlData = revData$controlData,
                                             userFormula = userFormula)
-        } else if (mono_resp_method == "curve") {
+        } else if (mono_resp_method == "ROC") {
             tmpROC <- AdjSpec_AllPoints_curve(diseaseData = revData$diseaseData,
                                              controlData = revData$controlData,
                                              userFormula = userFormula)
         } else {
-            stop("mono_resp_method need to be among the following: mono/curve/none!")
+            stop("mono_resp_method need to be among the following: regression/ROC/none!")
         }
 
         myROC <- list(sensitivity = tmpROC$specificity,

@@ -2,7 +2,7 @@ GetEst_SE <- function(diseaseData,
                      controlData,
                      userFormula,
                      fixSS,
-                     whichSE = "numerical",
+                     whichSE = "sample",
                      nbootstrap = 100,
                      verbose = TRUE) {
 
@@ -32,7 +32,7 @@ GetEst_SE <- function(diseaseData,
     pEst <- c(est_b, phi_q)
     names(pEst) <- allnames
 
-    if (whichSE == "numerical") {
+    if (whichSE == "sample") {
         pSD <- CalculateSD(M1, M0, all_Z_D, all_Z_C,
                            case_threshold_q, ctrl_threshold_q,
                            pEst, rho0 = fixSS)
@@ -45,7 +45,7 @@ GetEst_SE <- function(diseaseData,
                               nbootstrap,
                               verbose)
     } else {
-        stop("whichSE can only be numerical or bootstrap!")
+        stop("whichSE can only be sample or bootstrap!")
     }
     names(pSD) <- allnames
 

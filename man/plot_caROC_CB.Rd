@@ -47,18 +47,18 @@ diseaseData <- data.frame(M = M1, Z = Z_D)
 controlData <- data.frame(M = M0, Z = Z_C)
 formula = "M~Z"
 
-noneROC_CB <- caROC_CB(diseaseData,controlData,formula,
+ROC_CB1 <- caROC_CB(diseaseData,controlData,formula,
                        mono_resp_method = "none",
                        CB_alpha = 0.95,
                        nbin = 100,verbose = FALSE)
 ### plot confidence band individually
-plot_caROC_CB(noneROC_CB, add = FALSE, lty = 2, col = "blue")
+plot_caROC_CB(ROC_CB1, add = FALSE, lty = 2, col = "blue")
 
 ### plot confidence band together with the ROC curve
-noneROC <- caROC(diseaseData,controlData,formula,
+ROC1 <- caROC(diseaseData,controlData,formula,
                  mono_resp_method = "none", verbose = FALSE)
-plot_caROC(noneROC)
-plot_caROC_CB(noneROC_CB, add = TRUE, lty = 2, col = "blue")
+plot_caROC(ROC1)
+plot_caROC_CB(ROC_CB1, add = TRUE, lty = 2, col = "blue")
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

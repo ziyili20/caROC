@@ -23,7 +23,7 @@ GetSpecificity <- function(diseaseData,
                               CI_alpha = CI_alpha,
                               logit_CI = logit_CI,
                               verbose = verbose)
-    } else if (mono_resp_method == "mono") {
+    } else if (mono_resp_method == "regression") {
         myROC <- AdjSpec_mono(diseaseData = diseaseData,
                               controlData = controlData,
                               userFormula = userFormula,
@@ -33,7 +33,7 @@ GetSpecificity <- function(diseaseData,
                               CI_alpha = CI_alpha,
                               logit_CI = logit_CI,
                               verbose = verbose)
-    } else if (mono_resp_method == "curve") {
+    } else if (mono_resp_method == "ROC") {
         myROC <- AdjSpec_curve(diseaseData = diseaseData,
                                controlData = controlData,
                                userFormula = userFormula,
@@ -44,7 +44,7 @@ GetSpecificity <- function(diseaseData,
                                logit_CI = logit_CI,
                                 verbose = verbose)
     } else {
-        stop("mono_resp_method need to be among the following: mono/curve/none!")
+        stop("mono_resp_method need to be among the following: regression/ROC/none!")
     }
 
     return(myROC)

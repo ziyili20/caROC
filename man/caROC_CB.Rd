@@ -24,7 +24,7 @@ Data from controls including dependent (biomarker) and independent (covariates) 
   A character string to represent the function for covariate adjustment. For example, let Y denote biomarker, Z1 and Z2 denote two covariates. Then userFormula = "Y ~ Z1 + Z2".
 }
   \item{mono_resp_method}{
-The method used to restore monotonicity of the ROC curve or computed sensitivity/specificity value. It should one from the following: "none", "mono", "curve". "none" is not applying any monotonicity respecting method. "mono" is to apply the approach by Huang (2017). "curve" is to apply curve-based monotonicity respecting approach. Default value is "curve".
+The method used to restore monotonicity of the ROC curve or computed sensitivity/specificity value. It should one from the following: "none", "regression", "ROC". "none" is not applying any monotonicity respecting method. "regression" is to apply the approach by Huang (2017) on quantile regression step. "ROC" is to apply ROC-based monotonicity respecting approach. Default value is "ROC".
 }
   \item{global_ROC_controlled_by}{
 Whether sensitivity/specificity is used to control when computing global ROC. It should one from the following: "sensitivity", "specificity". Default is "sensitivity".
@@ -83,16 +83,16 @@ userFormula = "M~Z"
 ### calculate confidence band by controlling sensitivity
 ### using different monotonicity respecting methods
 
-noneROC_CB <- caROC_CB(diseaseData,controlData,userFormula,
+ROC_CB1 <- caROC_CB(diseaseData,controlData,userFormula,
                        mono_resp_method = "none",
                        CB_alpha = 0.95,
                        nbin = 100,verbose = FALSE)
-monoROC_CB <- caROC_CB(diseaseData,controlData,userFormula,
-                       mono_resp_method = "mono",
+ROC_CB2 <- caROC_CB(diseaseData,controlData,userFormula,
+                       mono_resp_method = "regression",
                        CB_alpha = 0.95,
                        nbin = 100,verbose = FALSE)
-curveROC_CB <- caROC_CB(diseaseData,controlData,userFormula,
-                       mono_resp_method = "curve",
+ROC_CB3 <- caROC_CB(diseaseData,controlData,userFormula,
+                       mono_resp_method = "ROC",
                        CB_alpha = 0.95,
                        nbin = 100,verbose = FALSE)
 }

@@ -46,16 +46,16 @@ diseaseData <- data.frame(M = M1, Z = Z_D)
 controlData <- data.frame(M = M0, Z = Z_C)
 userFormula = "M~Z"
 
-noneROC <- caROC(diseaseData,controlData,userFormula,
+ROC1 <- caROC(diseaseData,controlData,userFormula,
                  mono_resp_method = "none")
-monoROC <- caROC(diseaseData,controlData,userFormula,
-                 mono_resp_method = "mono")
-curveROC <- caROC(diseaseData,controlData,userFormula,
-                 mono_resp_method = "curve")
+ROC2 <- caROC(diseaseData,controlData,userFormula,
+                 mono_resp_method = "regression")
+ROC3 <- caROC(diseaseData,controlData,userFormula,
+                 mono_resp_method = "ROC")
 
-plot_caROC(noneROC)
-plot_caROC(monoROC, col = "red")
-plot_caROC(curveROC, col = "blue")
+plot_caROC(ROC1)
+plot_caROC(ROC2, col = "red")
+plot_caROC(ROC3, col = "blue")
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

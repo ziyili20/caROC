@@ -2,7 +2,7 @@ plot_caROC <- function(myROC,...){
 
     message("Plotting the ROC curve...")
 
-    if (myROC$mono_adj == "curve") {
+    if (myROC$mono_adj == "ROC") {
         linetype = "l"
     } else {
         linetype = "s"

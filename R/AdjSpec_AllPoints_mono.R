@@ -64,6 +64,6 @@ AdjSpec_AllPoints_mono <- function(diseaseData,
 
     return(list(sensitivity = sens_vec,
                 specificity = all_spec_mono,
-                mono_adj = "mono"))
+                mono_adj = "regression"))
 
 }

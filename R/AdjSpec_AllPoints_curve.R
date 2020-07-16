@@ -32,6 +32,6 @@ AdjSpec_AllPoints_curve <- function(diseaseData,
 
     return(list(sensitivity = sens_curve,
                 specificity = spec_curve,
-                mono_adj = "curve"))
+                mono_adj = "ROC"))
 
 }
