@@ -25,7 +25,7 @@ This function can be used to plot other ROC curve, as long as the input contains
 Plot the ROC curve.
 }
 \author{
-Ziyi Li <ziyi.li@emory.edu>
+Ziyi Li <zli16@mdanderson.org>
 }
 \examples{
 n1 = n0 = 500
@@ -49,13 +49,10 @@ userFormula = "M~Z"
 ROC1 <- caROC(diseaseData,controlData,userFormula,
                  mono_resp_method = "none")
 ROC2 <- caROC(diseaseData,controlData,userFormula,
-                 mono_resp_method = "regression")
-ROC3 <- caROC(diseaseData,controlData,userFormula,
                  mono_resp_method = "ROC")
 
 plot_caROC(ROC1)
-plot_caROC(ROC2, col = "red")
-plot_caROC(ROC3, col = "blue")
+plot_caROC(ROC2, col = "blue")
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

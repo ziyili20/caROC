@@ -29,7 +29,7 @@ The level(s) of sensitivity to be controlled at. Could be a scalar (e.g. 0.7) or
 The level(s) of specificity to be controlled at. Could be a scalar (e.g. 0.7) or a numeric vector (e.g. c(0.7, 0.8, 0.9)).
 }
   \item{mono_resp_method}{
-The method used to restore monotonicity of the ROC curve or computed sensitivity/specificity value. It should one from the following: "none", "regression", "ROC". "none" is not applying any monotonicity respecting method. "regression" is to apply the approach by Huang (2017) on quantile regression step. "ROC" is to apply ROC-based monotonicity respecting approach. Default value is "ROC".
+The method used to restore monotonicity of the ROC curve or computed sensitivity/specificity value. It should one from the following: "none", "ROC". "none" is not applying any monotonicity respecting method. "ROC" is to apply ROC-based monotonicity respecting approach. Default value is "ROC".
 }
   \item{whichSE}{
 The method used to compute standard error. It should be one from the following: "sample", "bootstrap", meaning to calculate the standard error using sample-based approach or bootstrap. Default is "sample".
@@ -105,8 +105,6 @@ caROC(diseaseData,controlData,userFormula,
 ROC1 <- caROC(diseaseData,controlData,userFormula = "M~Z",
                  mono_resp_method = "none")
 ROC2 <- caROC(diseaseData,controlData,userFormula = "M~Z",
-                 mono_resp_method = "regression")
-ROC3 <- caROC(diseaseData,controlData,userFormula = "M~Z",
                  mono_resp_method = "ROC")
 }
 \keyword{ sensitivity }% use one of  RShowDoc("KEYWORDS")

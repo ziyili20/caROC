@@ -27,16 +27,6 @@ GetSensitivity <- function(diseaseData,
                               CI_alpha = CI_alpha,
                               logit_CI = logit_CI,
                               verbose = verbose)
-    } else if (mono_resp_method == "regression") {
-        myROC <- AdjSpec_mono(diseaseData = revData$diseaseData,
-                              controlData = revData$controlData,
-                              userFormula = userFormula,
-                              fixSS = control_specificity,
-                              whichSE = whichSE,
-                              nbootstrap = nbootstrap,
-                              CI_alpha = CI_alpha,
-                              logit_CI = logit_CI,
-                              verbose = verbose)
     } else if (mono_resp_method == "ROC") {
         myROC <- AdjSpec_curve(diseaseData = revData$diseaseData,
                                controlData = revData$controlData,
@@ -48,7 +38,7 @@ GetSensitivity <- function(diseaseData,
                                logit_CI = logit_CI,
                                verbose = verbose)
     } else {
-        stop("mono_resp_method need to be among the following: regression/ROC/none!")
+        stop("mono_resp_method need to be among the following: ROC/none!")
     }
 
     return(myROC)

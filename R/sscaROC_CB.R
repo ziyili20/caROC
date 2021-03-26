@@ -1,7 +1,8 @@
-caROC_CB <- function(diseaseData,
+sscaROC_CB <- function(diseaseData,
                      controlData,
                      userFormula,
-                     mono_resp_method,
+                     mono_resp_method = "none",
+                     target_covariates,
                      global_ROC_controlled_by = "sensitivity",
                      CB_alpha = 0.95,
                      logit_CB = FALSE,
@@ -17,7 +18,7 @@ caROC_CB <- function(diseaseData,
 
         message("Global ROC by controlling specificity.")
 
-        revData <- reverseData(diseaseData = diseaseData,
+        revData <- reverseData_L(diseaseData = diseaseData,
                                controlData = controlData,
                                userFormula = userFormula)
         diseaseData <- revData$diseaseData
@@ -27,21 +28,18 @@ caROC_CB <- function(diseaseData,
         stop("Global ROC can only be controlled by sensitivity or specificity!")
     }
 
-    origROC <- caROC(diseaseData = diseaseData,
+    origROC <- sscaROC(diseaseData = diseaseData,
                      controlData = controlData,
                      userFormula = userFormula,
+                     target_covariates = target_covariates,
                      mono_resp_method = mono_resp_method,
                      verbose = verbose)
 
     sens_vec <- seq(0, 1, 1/nbin)
     supmat <- matrix(0, nbootstrap, length(sens_vec))
-    if (verbose) {
-        pb = txtProgressBar(min = 0, max = nbootstrap, style = 3)
-    }
+    pb = txtProgressBar(min = 0, max = nbootstrap, style = 3)
     for(nidx in 1:nbootstrap) {
-        if (verbose) {
-            setTxtProgressBar(pb, nidx)
-        }
+        setTxtProgressBar(pb, nidx)
 
         oneindx1 <- sample(1:nrow(controlData), nrow(controlData), replace = TRUE)
         oneindx2 <- sample(1:nrow(diseaseData), nrow(diseaseData), replace = TRUE)
@@ -49,9 +47,10 @@ caROC_CB <- function(diseaseData,
         controlData_bt <- controlData[oneindx1, ]
         diseaseData_bt <- diseaseData[oneindx2, ]
 
-        btROC <- caROC(diseaseData = diseaseData_bt,
+        btROC <- sscaROC(diseaseData = diseaseData_bt,
                        controlData = controlData_bt,
                        userFormula = userFormula,
+                       target_covariates = target_covariates,
                        mono_resp_method = mono_resp_method,
                        verbose = verbose)
 
@@ -59,9 +58,7 @@ caROC_CB <- function(diseaseData,
         supmat[nidx,] <- outres$alldiff
 
     }
-    if (verbose) {
-        close(pb)
-    }
+    close(pb)
     finalorigY <- outres$finalorigY
 
 
